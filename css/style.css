@@ -1,0 +1,8 @@
+/******* Tooltip error *********/
+.tooltip-inner {
+    background-color: #DC143C;
+}
+
+.tooltip .tooltip-arrow {
+    --bs-tooltip-bg: #DC143C;
+}
