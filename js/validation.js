@@ -3,10 +3,11 @@ const form = document.querySelector("form");
 for (let element of form.elements) {
     const type = element.type;
     if (type != "submit") {
+        const elHelpText = document.getElementById(`${element.name}Help`);
         element.addEventListener("invalid", (event) => {
             event.preventDefault();
             element.classList.add("is-invalid");
-            const elHelpText = document.getElementById(`${element.name}Help`);
+            // const elHelpText = document.getElementById(`${element.name}Help`);
             elHelpText.classList.add("text-danger");
             const firstInvalidField = form.querySelector(":invalid");
             firstInvalidField.focus();
@@ -16,8 +17,8 @@ for (let element of form.elements) {
             if (element.name == firstInvalidField.name) {
                 tooltip(firstInvalidField);
             }
-            onChangeSuccess(element, elHelpText);
         });
+        onChangeSuccess(element, elHelpText);
     }
 }
 
