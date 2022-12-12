@@ -9,15 +9,8 @@ function validation(form) {
         const elHelpText = document.getElementById(`${element.name}Help`);
         const type = element.type;
         if (type != "submit") {
-            const opt = {
-                placement: "top",
-                trigger: "focus",
-                title: "Ce champ est obligatoire."
-            };
-            const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, opt);
-            tooltip.disable();
-            onChange(element, elHelpText, tooltip);
-            invalid(element, elHelpText, tooltip)
+            onChange(element, elHelpText);
+            invalid(element, elHelpText)
         }
     }
 }
@@ -29,23 +22,32 @@ function invalid(element, elHelpText, tooltip) {
         element.classList.add("is-invalid");
         elHelpText.classList.add("text-danger");
         const firstInvalidField = form.querySelector('.is-invalid');
+        const tooltip = new tooltipInitialize(element);
         element.setAttribute("data-bs-toggle", "tooltip");
         firstInvalidField.focus();
         tooltip.enable();
     });
 }
 
+function tooltipInitialize(element) {
+    const opt = {
+        placement: "top",
+        trigger: "focus",
+        title: "Ce champ est obligatoire."
+    };
+    const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, opt);
+    return tooltip;
+}
+
 // Add message to tooltip "error validation"
 function tooltipMessage(element) {
-    let tooltip = bootstrap.Tooltip.getInstance(element);
+    const tooltip = bootstrap.Tooltip.getInstance(element);
     if (element.name == "rate" && element.validity.valueMissing) {
         tooltip.setContent({ '.tooltip-inner': 'Ce champ est obligatoire.' });
     } else if (element.name == "rate" && element.validity.rangeUnderflow) {
         tooltip.setContent({ '.tooltip-inner': 'Doit être positif' });
     } else if (element.name == "date" && element.validity.rangeUnderflow) {
         tooltip.setContent({ '.tooltip-inner': 'Doit être égale ou supérieure à aujourd’hui' });
-    } else {
-        console.log("On n'est pas dans la condition");
     }
 }
 
@@ -53,8 +55,13 @@ function tooltipMessage(element) {
 function onChange(element, elHelpText, tooltip) {
     element.addEventListener("change", (event) => {
         event.preventDefault();
+        const tooltip = bootstrap.Tooltip.getInstance(element);
         if (element.validity.valid) {
-            tooltip.disable();
+            if (tooltip) {
+                tooltip.disable();
+            } else {
+                console.log("There is no a tooltip to disable");
+            }
             element.classList.remove("is-invalid");
             element.classList.add("is-valid");
             elHelpText.classList.remove("text-danger");
@@ -62,9 +69,14 @@ function onChange(element, elHelpText, tooltip) {
         } else {
             element.classList.add("is-invalid");
             elHelpText.classList.add("text-danger");
-            tooltipMessage(element);
-            tooltip.enable();
-            console.log("pas valide");
+            if (tooltip) {
+                tooltip.enable();
+            } else {
+                const tooltip = new tooltipInitialize(element);
+                tooltipMessage(element);
+                tooltip.enable();
+                console.log('Creation of tooltips');
+            }
         }
     });
 
