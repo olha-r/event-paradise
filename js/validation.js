@@ -21,7 +21,7 @@ function invalid(element, elHelpText) {
         element.classList.add("is-invalid");
         elHelpText.classList.add("text-danger");
         const firstInvalidField = form.querySelector('.is-invalid');
-        const tooltip = new tooltipInitialize(element);
+        const tooltip = tooltipInitialize(element);
         element.setAttribute("data-bs-toggle", "tooltip");
         firstInvalidField.focus();
         tooltip.enable();
@@ -67,7 +67,7 @@ function onChange(element, elHelpText) {
         } else {
             element.classList.add("is-invalid");
             elHelpText.classList.add("text-danger");
-            const tooltip = new tooltipInitialize(element);
+            const tooltip = tooltipInitialize(element);
             tooltipMessage(element);
             tooltip.enable();
         }
