@@ -58,7 +58,7 @@ function onChange(element, elHelpText, tooltip) {
         const tooltip = bootstrap.Tooltip.getInstance(element);
         if (element.validity.valid) {
             if (tooltip) {
-                tooltip.disable();
+                tooltip.dispose();
             } else {
                 console.log("There is no a tooltip to disable");
             }
