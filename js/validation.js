@@ -9,8 +9,8 @@ function validation(form) {
         const elHelpText = document.getElementById(`${element.name}Help`);
         const type = element.type;
         if (type != "submit") {
-            onChange(element, elHelpText);
             invalid(element, elHelpText)
+            onChange(element, elHelpText);
         }
     }
 }
@@ -32,7 +32,7 @@ function invalid(element, elHelpText, tooltip) {
 function tooltipInitialize(element) {
     const opt = {
         placement: "top",
-        trigger: "focus",
+        trigger: "focus hover",
         title: "Ce champ est obligatoire."
     };
     const tooltip = bootstrap.Tooltip.getOrCreateInstance(element, opt);
@@ -69,14 +69,14 @@ function onChange(element, elHelpText, tooltip) {
         } else {
             element.classList.add("is-invalid");
             elHelpText.classList.add("text-danger");
-            if (tooltip) {
-                tooltip.enable();
-            } else {
-                const tooltip = new tooltipInitialize(element);
-                tooltipMessage(element);
-                tooltip.enable();
-                console.log('Creation of tooltips');
-            }
+            // if (tooltip) {
+            //     tooltip.enable();
+            // } else {
+            const tooltip = new tooltipInitialize(element);
+            tooltipMessage(element);
+            tooltip.enable();
+            console.log('Creation of tooltips');
+            // }
         }
     });
 
