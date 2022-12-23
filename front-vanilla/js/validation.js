@@ -1,11 +1,10 @@
 const form = document.querySelector("form");
 
 handleValidation(form);
-handleSubmit(form);
 
 function handleValidation(form) {
     for (const element of form.elements) {
-        const elHelpText = document.getElementById(`${element.name}Help`);
+        const elHelpText = document.getElementById(`${element.id}Help`);
         const type = element.type;
         if (type != "submit") {
             invalid(element, elHelpText)
@@ -22,7 +21,6 @@ function invalid(element, elHelpText) {
         elHelpText.classList.add("text-danger");
         const firstInvalidField = form.querySelector('.is-invalid');
         const tooltip = tooltipInitialize(element);
-        element.setAttribute("data-bs-toggle", "tooltip");
         firstInvalidField.focus();
         tooltip.enable();
     });
@@ -73,30 +71,4 @@ function onChange(element, elHelpText) {
         }
     });
 
-}
-
-
-// Reset of page after submit
-function handleSubmit(form) {
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        toast();
-        event.target.reset();
-        for (let element of form.elements) {
-            const type = element.type;
-            if (type != "submit") {
-                element.classList.remove("is-valid");
-                const idHelpText = `${element.name}Help`;
-                const elHelpText = document.getElementById(idHelpText);
-                elHelpText.classList.remove("text-success");
-            }
-        }
-    });
-}
-
-// Create toast of creating event success 
-function toast() {
-    const toastEl = document.getElementById('toast');
-    const toast = new bootstrap.Toast(toastEl);
-    toast.show();
 }

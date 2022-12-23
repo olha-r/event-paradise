@@ -12,7 +12,9 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"
         defer></script>
     <script src="js/date.js" defer></script>
+    <script src="js/load-places-themes.js" defer></script>
     <script src="js/validation.js" defer></script>
+    <script src="js/events.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -40,11 +42,7 @@
                 </div>
                 <div class="col-12 col-md-4 mb-3">
                     <label for="place" class="form-label fw-semibold">Lieu</label>
-                    <select name="place" id="place" class="form-select" required>
-                        <option selected disabled value="">Choisir un thème dans la liste</option>
-                        <option value="paris">Paris</option>
-                        <option value="rennes">Rennes</option>
-                        <option value="marseille">Marseille</option>
+                    <select name="placeId" id="place" class="form-select" required>
                     </select>
                     <div id="placeHelp" class="form-text">Lieu de l'événement.</div>
                 </div>
@@ -53,11 +51,7 @@
             <div class="row">
                 <div class="col-12 col-md-8 mb-3">
                     <label for="theme" class="form-label fw-semibold">Thème</label>
-                    <select name="theme" id="theme" class="form-select" required>
-                        <option selected disabled value="">Choisir un thème dans la liste</option>
-                        <option value="ecologie">Écologie</option>
-                        <option value="ressourcesHumaines">Ressources Humaines</option>
-                        <option value="tech">Tech</option>
+                    <select name="themeId" id="theme" class="form-select" required>
                     </select>
 
                     <div id="themeHelp" class="form-text">Thème de l'événement.</div>
