@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.events.database.DataBase;
-import co.simplon.events.dtos.ThemeView;
+import co.simplon.events.dtos.LabelValue;
 import co.simplon.events.entities.Theme;
 
 @RestController
@@ -18,15 +18,15 @@ import co.simplon.events.entities.Theme;
 public class ThemeController {
 
     @GetMapping()
-    public static Collection<ThemeView> getAll() {
+    public static Collection<LabelValue> getAll() {
 	Collection<Theme> themes = DataBase.findAllThemes();
-	Collection<ThemeView> views = new ArrayList<>();
+	Collection<LabelValue> themesList = new ArrayList<>();
 	for (Theme theme : themes) {
-	    ThemeView view = new ThemeView();
-	    view.setId(theme.getId());
-	    view.setName(theme.getName());
-	    views.add(view);
+	    LabelValue element = new LabelValue();
+	    element.setId(theme.getId());
+	    element.setName(theme.getName());
+	    themesList.add(element);
 	}
-	return views;
+	return themesList;
     }
 }

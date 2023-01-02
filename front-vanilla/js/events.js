@@ -12,7 +12,6 @@ render(data);
 
 // Send data to the API
 async function send(data) {
-    console.log(data);
     const options = {
         method: "POST",
         headers: {
@@ -31,9 +30,7 @@ function render(data) {
     properties.forEach((property) => {
         const element = form.elements[property];
         element.addEventListener("change", (event) => {
-            console.log(`${data.name} changed`);
             data[property] = element.value;
-            console.log(data, data[property]);
         });
     });
 }
@@ -44,10 +41,10 @@ function handleSubmit(form) {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const response = await send(data);
-        console.log(response);
+
         if (response.status == 400) {
             form.checkValidity();
-            console.log("Error 400");
+
         } else if (response.status == 200) {
             for (let element of form.elements) {
                 const type = element.type;

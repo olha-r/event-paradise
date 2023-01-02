@@ -1,12 +1,12 @@
 package co.simplon.events.dtos;
 
-public class ThemeView {
+public class LabelValue {
 
     private Long id;
 
     private String name;
 
-    public ThemeView() {
+    public LabelValue() {
 	super();
     }
 
